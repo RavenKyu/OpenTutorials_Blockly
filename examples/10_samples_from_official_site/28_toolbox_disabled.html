@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../blockly/blockly_compressed.js"></script>
+    <script src="../../blockly/blocks_compressed.js"></script>
+    <script src="../../blockly/msg/js/en.js"></script>
+</head>
+<body>
+    <!-- Blockly가 생성될 영역 및 크기 -->
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+    <!-- 특정 블럭을 사용 못하도록 설정 가능 -->
+    <xml id="toolbox" style="display: none">
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="math_single" disabled="true"></block>
+    </xml>
+
+    <!-- Blockly 실행. 인자 값으로 xml toolbox 사용 -->
+    <script>
+        var workspacePlayground = Blockly.inject('blocklyDiv',
+            {toolbox: document.getElementById('toolbox')});
+    </script>
+</body>
+</html>

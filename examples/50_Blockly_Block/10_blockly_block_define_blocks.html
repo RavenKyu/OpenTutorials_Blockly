@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../blockly/blockly_compressed.js"></script>
+    <script src="../../blockly/blocks_compressed.js"></script>
+    <script src="../../blockly/msg/js/en.js"></script>
+</head>
+<body>
+<!-- Blockly가 생성될 영역 및 크기 -->
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+<span id="properties">hi</span>
+
+<!-- 카테고리를 사용하려면 모든 블럭을 전부 카테고리화 필요 -->
+<xml id="toolbox" style="display: none">
+    <category name="Control">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+    </category>
+    <category name="Logic">
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+    </category>
+
+</xml>
+
+
+<script>
+    var workspacePlayground = Blockly.inject('blocklyDiv',
+        {toolbox: document.getElementById('toolbox')});
+
+    // 워크페이스에서 이벤트를 감시
+    console.log(workspacePlayground.getTopBlocks())
+    workspacePlayground.addChangeListener(EventHDL);
+    function EventHDL(e) {
+        // UI 이벤트는 제외
+        if (Blockly.Events.UI == e.type) {
+            // Block이 아닌 경우도 제외
+            if (e.blockId == undefined) {
+                return
+            }
+            console.log(e.blockId)
+            console.log(workspacePlayground.getBlockById(e.blockId).type)
+            // 사용자 정의 데이터 삽입
+            workspacePlayground.getBlockById(e.blockId).data = {"name":"abc", "age": 17}
+        }
+
+
+    }
+
+</script>
+</body>
+</html>

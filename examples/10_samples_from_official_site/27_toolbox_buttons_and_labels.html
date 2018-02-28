@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../blockly/blockly_compressed.js"></script>
+    <script src="../../blockly/blocks_compressed.js"></script>
+    <script src="../../blockly/msg/js/en.js"></script>
+</head>
+<body>
+    <!-- Blockly가 생성될 영역 및 크기 -->
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+    <!-- 라벨과 버튼을 추가. CSS를 이용한 스타일링 -->
+    <xml id="toolbox" style="display: none">
+        <block type="logic_operation"></block>
+        <label text="A label" web-class="myLabelStyle"></label>
+        <label text="Another label"></label>
+        <block type="logic_negate"></block>
+        <button text="A button" callbackKey="myFirstButtonPressed"></button>
+        <block type="logic_boolean"></block>
+    </xml>
+
+    <style>
+        .myLabelStyle>.blocklyFlyoutLabelText {
+            font-style: italic;
+            fill: green;
+        }
+    </style>
+
+
+    <!-- Blockly 실행. 인자 값으로 xml toolbox 사용 -->
+    <script>
+        var workspacePlayground = Blockly.inject('blocklyDiv',
+            {toolbox: document.getElementById('toolbox')});
+
+        // 이 부분에서 콘솔에 경고문구가 뜬다.
+        // workspace를 출력하기전에 버튼의 콜백을 등록해주면 해결
+        workspacePlayground.registerButtonCallback("myFirstButtonPressed", function(button){
+            console.log("Button Clicked!")
+        })
+        // 업데이트를 해주지 않으면 버튼은 동작하지 않는다.
+        workspacePlayground.updateToolbox(document.getElementById('toolbox'))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../blockly/blockly_compressed.js"></script>
+    <script src="../../blockly/blocks_compressed.js"></script>
+    <script src="../../blockly/msg/js/en.js"></script>
+</head>
+<body>
+    <!-- Blockly가 생성될 영역 및 크기 -->
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+    <span id="properties">hi</span>
+    <!-- Blockly Toolbox에 들어갈 블럭 지정 -->
+    <!-- 기본 블럭을 이용 -->
+    <xml id="toolbox" style="display: none">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+    </xml>
+
+    <!-- Blockly 실행. 인자 값으로 xml toolbox 사용 -->
+    <script>
+        var workspacePlayground = Blockly.inject('blocklyDiv',
+            {toolbox: document.getElementById('toolbox')});
+        var properties = ""
+        var doc = document.getElementById('properties')
+
+        properties += "ALIGN_CENTRE : " + Blockly.ALIGN_CENTRE + "\n"
+        properties += "ALIGN_LEFT : " + Blockly.ALIGN_LEFT + "\n"
+        properties += "ALIGN_RIGHT : " + Blockly.ALIGN_RIGHT + "\n"
+        properties += "BUMP_DELAY 트리거와 미 연결 블록 간의 정렬을 지연시키는 ms 지연 : " + Blockly.BUMP_DELAY + "\n"
+        properties += "COLLAPSE_CHARS 축소 된 블록을 잘라낼 문자 수입니다: " + Blockly.COLLAPSE_CHARS + "\n"
+        properties += "DELETE_AREA_NONE 이벤트가 삭제 영역에 없음을 나타내는 ENUM. 이전 버전과의 호환성을 위해 Null. : " + Blockly.DELETE_AREA_NONE + "\n"
+        properties += "DELETE_AREA_TOOLBOX 이벤트가 도구 상자 또는 플라이 아웃의 삭제 영역에 있음을 나타내는 ENUM : " + Blockly.DELETE_AREA_NONE + "\n"
+        properties += "DELETE_AREA_TRASH 이벤트가 휴지통의 삭제 영역에 있음을 나타내는 ENUM. : " + Blockly.DELETE_AREA_TRASH + "\n"
+        properties += "DELETE_VARIABLE_ID field_variable에 작성된 드롭 다운에 사용할 문자열입니다. 이 문자열은 드롭 다운의이 옵션이 '% 1 \"변수 삭제\"임을 나타내며, 선택하면 변수를 삭제하라는 메시지를 표시합니다.. : " + Blockly.DELETE_VARIABLE_ID + "\n"
+        properties += "DRAG_BEGIN DRAG_RADIUS가 아닌 내부의 ENUM은 클릭 수와 드래그 수를 구별합니다. : " + Blockly.DRAG_BEGIN + "\n"
+        properties += "DRAG_FREE 자유롭게 드래그 할 수있는 ENUM (적용되는 경우 DRAG_RADIUS 외부). : " + Blockly.DRAG_FREE + "\n"
+        properties += "DRAG_NONE 끌기 조작이없는 경우 ENUM. : " + Blockly.DRAG_NONE + "\n"
+        properties += "DRAG_RADIUS 끌기가 시작되기 전에 마우스가 움직여야하는 픽셀 수입니다. : " + Blockly.DRAG_RADIUS + "\n"
+        properties += "DRAG_STACK 스택에서 블록을 드래그 할 때 스택을 두 개 (true)로 분할하거나 스택을 치료하는 블록을 드래그합니다 (false). : " + Blockly.DRAG_STACK + "\n"
+        properties += "DRAG_STICKY DRAG_RADIUS 내부의 ENUM입니다.. : " + Blockly.DRAG_STICKY + "\n"
+        properties += "DUMMY_INPUT 더미 입력에 대한 ENUM. 입력이없는 필드를 추가하는 데 사용됩니다. : " + Blockly.DUMMY_INPUT + "\n"
+        properties += "FLYOUT_DRAG_RADIUS : " + Blockly.FLYOUT_DRAG_RADIUS + "\n"
+        properties += "HSV_SATURATION 색상에 관계없이 블록 색상의 풍부함. 0 (포함) ~ 1 (제외)의 범위 내에 있어야합니다. : " + Blockly.HSV_SATURATION + "\n"
+        properties += "HSV_VALUE 색상에 관계없이 블록 색상의 강도입니다. 0 (포함) ~ 1 (제외)의 범위 내에 있어야합니다. : " + Blockly.HSV_VALUE + "\n"
+        properties += "HTML_NS HTML 요소의 필수 네임 스페이스. : " + Blockly.HTML_NS + "\n"
+        properties += "INPUT_VALUE 오른쪽 방향 값 입력을위한 ENUM. 예 : 'set item'또는 'return'로 설정하십시오. : " + Blockly.INPUT_VALUE + "\n"
+        properties += "VARIABLE_CATEGORY_NAME  toolbox xml의 카테고리의 \"custom\"속성에 사용하기위한 문자열. 이 문자열은 카테고리가 가변 블록으로 동적으로 채워 져야 함을 나타냅니다.\n : " + Blockly.VARIABLE_CATEGORY_NAME + "\n"
+
+
+
+        doc.innerText = properties
+
+    </script>
+
+</body>
+</html>
