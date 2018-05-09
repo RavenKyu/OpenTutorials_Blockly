@@ -1,0 +1,104 @@
+<!-- 워크스페이스에 올라온 블럭을 파이썬 코드로 변환하는 예제 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../blockly/blockly_compressed.js"></script>
+    <script src="../../blockly/blocks_compressed.js"></script>
+    <script src="../../blockly/msg/js/en.js"></script>
+    <!-- 아래 파이썬 관련 코드에는 블럭과 파이썬 코드가 매핑되어 있음 -->
+    <script src="../../blockly/generators/python.js"></script>
+    <script src="../../blockly/generators/python/logic.js"></script>
+    <script src="../../blockly/generators/python/loops.js"></script>
+    <script src="../../blockly/generators/python/math.js"></script>
+    <script src="../../blockly/generators/python/text.js"></script>
+    <script src="../../blockly/generators/python/lists.js"></script>
+    <script src="../../blockly/generators/python/colour.js"></script>
+    <script src="../../blockly/generators/python/variables.js"></script>
+    <script src="../../blockly/generators/python/procedures.js"></script>
+
+    <script type="text/javascript">
+        //  블럭을 파이썬 코드로 변환
+        function toCode(lang) {
+            let code = "";
+            code = Blockly[lang].workspaceToCode(workspacePlayground);
+            console.log(code);
+        }
+    </script>
+</head>
+
+<body>
+<!-- Blockly가 생성될 영역 및 크기 -->
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+<input type="button" value="To Python" onclick="toCode('Python')">
+<!-- 카테고리를 사용하려면 모든 블럭을 전부 카테고리화 필요 -->
+<xml id="toolbox" style="display: none">
+    <category name="Control">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+    </category>
+    <category name="User Custom">
+        <block type="user_custom_block"></block>
+        <block type="user_custom_text"></block>
+    </category>
+</xml>
+
+<script>
+    // user_custom_block 정의. 이 부분이 없으면 블럭이 카테고리에서 검은 블럭 표현.
+    Blockly.defineBlocksWithJsonArray(
+        [
+            {
+                "type": "user_custom_block",
+                "message0": "User Custom Block %1",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    }
+                ],
+                "output": "String",
+                "colour": 160,
+                "tooltip": "This Block is User Custom Block",
+                "helpUrl": "http://....."
+            },
+            {
+                "type": "user_custom_text",
+                "message0": "%1",
+                "args0": [{
+                    "type": "field_input",
+                    "name": "TEXT",
+                    "text": ""
+                }],
+                "output": "String",
+                "colour": "%{BKY_TEXTS_HUE}",
+                "helpUrl": "%{BKY_TEXT_TEXT_HELPURL}",
+                "tooltip": "%{BKY_TEXT_TEXT_TOOLTIP}",
+                "extensions": [
+                    "text_quotes",
+                    "parent_tooltip_when_inline"
+                ]
+            },
+        ]
+    );
+
+    // 파이썬으로 변환시 user_custom_block에 대한 파이썬 코드 맵핑
+    // valueToCode 에서 두 번째 인자 값에서 지정된 name 필드에서 값을 가져온다.
+    Blockly.Python['user_custom_block'] = function (block) {
+        // Print statement.
+        var msg = Blockly.Python.valueToCode(block, 'VALUE',
+            Blockly.Python.ORDER_NONE) || '\'\'';
+        return 't_user_block(' + msg + ')\n';
+    };
+    Blockly.Python['user_custom_text'] = function (block) {
+        // Text value.
+        var code = Blockly.Python.quote_(block.getFieldValue('TEXT'));
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+    var toolbox = document.getElementById('toolbox')
+    var workspacePlayground = Blockly.inject('blocklyDiv',
+        {toolbox: toolbox});
+</script>
+</body>
+</html>
